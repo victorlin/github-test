@@ -1,0 +1,7 @@
+on: push
+jobs:
+  run:
+    runs-on: ubuntu-latest
+    steps:
+    - run: echo 'CACHE_DATE="$(date --utc +%Y%m%dT%H%M%SZ)"'
+    - run: eval echo 'CACHE_DATE="$(date --utc +%Y%m%dT%H%M%SZ)"'
