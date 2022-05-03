@@ -3,5 +3,8 @@ jobs:
   run:
     runs-on: ubuntu-latest
     steps:
-    - run: echo 'CACHE_DATE="$(date --utc +%Y%m%dT%H%M%SZ)"'
-    - run: eval echo 'CACHE_DATE="$(date --utc +%Y%m%dT%H%M%SZ)"'
+    - run: echo "CACHE_DATE1=$(date --utc +%Y%m%dT%H%M%SZ)" >> $GITHUB_ENV; echo $CACHE_DATE1
+    - run: echo 'CACHE_DATE2=$(date --utc +%Y%m%dT%H%M%SZ)' >> $GITHUB_ENV; echo $CACHE_DATE2
+    - run: echo 'CACHE_DATE3="$(date --utc +%Y%m%dT%H%M%SZ)"' >> $GITHUB_ENV; echo $CACHE_DATE3
+    - run: eval echo 'CACHE_DATE4="$(date --utc +%Y%m%dT%H%M%SZ)"' >> $GITHUB_ENV; echo $CACHE_DATE4
+    - run: eval echo "CACHE_DATE5='$(date --utc +%Y%m%dT%H%M%SZ)'" >> $GITHUB_ENV; echo $CACHE_DATE5
