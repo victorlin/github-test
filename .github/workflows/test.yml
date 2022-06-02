@@ -16,7 +16,7 @@ jobs:
         text: 'some custom text'
     - uses: ./.github/actions/output
       with:
-        text: ${{ env.TRUE_VALUE == 'true' && 'this should be shown' }}
+        text: ${{ env.TRUE_VALUE == 'true' && 'this should be shown' || null }}
     - uses: ./.github/actions/output
       with:
-        text: ${{ env.FALSE_VALUE == 'true' && 'this should not be shown' }}
+        text: ${{ env.FALSE_VALUE == 'true' && 'this should not be shown' || null }}
