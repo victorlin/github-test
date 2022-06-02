@@ -5,5 +5,6 @@ inputs:
 runs:
   using: composite
   steps:
-  - run: echo "TEXT: ${{ inputs.text }}"
+  - run: |
+      echo "TEXT: ${{ inputs.text }}"
     shell: bash
