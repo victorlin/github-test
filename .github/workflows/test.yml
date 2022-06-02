@@ -5,13 +5,18 @@ jobs:
     steps:
     - run: echo "TRUE_VALUE=${{ github.event_name == 'push' }}" >> $GITHUB_ENV
     - run: echo "FALSE_VALUE=${{ github.event_name != 'push' }}" >> $GITHUB_ENV
+    - name: Set outputs
+      run: echo '::set-output name=FALSE_VALUE::false'
+      id: id1
+    - name: Get color
+      run: echo "The selected color is ${{ steps.id1.outputs.FALSE_VALUE }}"
     - uses: actions/checkout@v2
     - uses: ./.github/actions/output
       with:
         text: 'some custom text'
     - uses: ./.github/actions/output
       with:
-        text: ${{ env.TRUE_VALUE && 'this should be shown' }}
+        text: ${{ env.TRUE_VALUE == 'true' && 'this should be shown' }}
     - uses: ./.github/actions/output
       with:
-        text: ${{ env.FALSE_VALUE && 'this should not be shown' }}
+        text: ${{ env.FALSE_VALUE == 'true' && 'this should not be shown' }}
