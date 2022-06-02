@@ -1,0 +1,9 @@
+name: 'Output some text'
+inputs:
+  text:
+    required: true
+runs:
+  using: composite
+  steps:
+  - run: echo "TEXT: ${{ inputs.text }}"
+    shell: bash
