@@ -3,7 +3,7 @@ jobs:
   run:
     runs-on: ubuntu-latest
     steps:
-    - run: echo "foo=${{ github.event_name == 'push' }}" >> $GITHUB_ENV
+    - run: echo "TRUE_VALUE=${{ github.event_name == 'push' }}" >> $GITHUB_ENV
     - run: echo "FALSE_VALUE=${{ github.event_name != 'push' }}" >> $GITHUB_ENV
     - uses: actions/checkout@v2
     - uses: ./.github/actions/output
@@ -11,4 +11,7 @@ jobs:
         text: 'some custom text'
     - uses: ./.github/actions/output
       with:
-        text: ${{ env.FALSE_VALUE && 'this is a string' }}
+        text: ${{ env.TRUE_VALUE && 'this should be shown' }}
+    - uses: ./.github/actions/output
+      with:
+        text: ${{ env.FALSE_VALUE && 'this should not be shown' }}
