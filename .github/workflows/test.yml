@@ -4,11 +4,11 @@ jobs:
     runs-on: ubuntu-latest
     steps:
     - run: echo "foo=${{ github.event_name == 'push' }}" >> $GITHUB_ENV
-    - run: echo "bar=${{ github.event_name != 'push' }}" >> $GITHUB_ENV
-    - run: echo '::set-output name=FOO_OUTPUT::$foo'
-      id: foo_step
+    - run: echo "FALSE_VALUE=${{ github.event_name != 'push' }}" >> $GITHUB_ENV
     - uses: actions/checkout@v2
     - uses: ./.github/actions/output
       with:
         text: 'some custom text'
-    - run: echo "${{ steps.foo_step.outputs.FOO_OUTPUT }}"
+    - uses: ./.github/actions/output
+      with:
+        text: ${{ env.FALSE_VALUE && 'this is a string' }}
