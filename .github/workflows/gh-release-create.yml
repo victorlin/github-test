@@ -14,3 +14,5 @@ jobs:
         gh release create v0.1.0 \
           --title v0.1.0 \
           --target v0.1.0
+      env:
+        GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
