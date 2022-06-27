@@ -1,0 +1,13 @@
+on: workflow_dispatch
+jobs:
+  run:
+    runs-on: ubuntu-latest
+    steps:
+    - uses: actions/checkout@v3
+    - run: git commit --allow-empty -m "test"
+    - run: git tag v0.1.0
+    - run: git push v0.1.0
+    - run: |
+      gh release create v0.1.0 \
+        --title v0.1.0 \
+        --target v0.1.0
