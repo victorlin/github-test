@@ -4,6 +4,9 @@ jobs:
     runs-on: ubuntu-latest
     steps:
     - uses: actions/checkout@v3
+    - run: |
+        git config --global user.email "github-actions[bot]@users.noreply.github.com"
+        git config --global user.name "github-actions[bot]"
     - run: git commit --allow-empty -m "test"
     - run: git tag v0.1.0
     - run: git push v0.1.0
