@@ -3,27 +3,30 @@ jobs:
   run:
     runs-on: ubuntu-latest
     steps:
-    - run: echo "FOO=bar" | tee -a $GITHUB_ENV
+    - run: echo "EXISTS=foo" | tee -a $GITHUB_ENV
 
-    - if: ${{ env.FOO == 'bar' }}
-      run: echo "${{ env.FOO == 'bar' }}"
+    - run: echo "EXISTS=${{ env.EXISTS }}"
+    - run: echo "UNSET=${{ env.UNSET }}"
 
-    - if: ${{ env.FOO }} == 'bar'
-      run: echo "${{ env.FOO }} == 'bar'"
+    - if: ${{ env.EXISTS == 'bar' }}
+      run: echo "{ env.EXISTS == 'bar' }"
 
-    - if: ${{ env.BAD == '' }}
-      run: echo "${{ env.BAD == '' }}"
+    - if: ${{ env.EXISTS }} == 'bar'
+      run: echo "{ env.EXISTS } == 'bar'"
 
-    - if: ${{ env.BAD }} == ''
-      run: echo "${{ env.BAD }} == ''"
+    - if: ${{ env.UNSET == '' }}
+      run: echo "{ env.UNSET == '' }"
 
-    - if: ${{ env.BAD  != '' }}
-      run: echo "this should not print! ${{ env.BAD  != '' }}"
+    - if: ${{ env.UNSET }} == ''
+      run: echo "{ env.UNSET } == ''"
 
-    - if: ${{ env.BAD }} != ''
-      run: echo "this should not print ${{ env.BAD }} != ''"
+    - if: ${{ env.UNSET  != '' }}
+      run: echo "this should not print! { env.UNSET  != '' }"
+
+    - if: ${{ env.UNSET }} != ''
+      run: echo "this should not print! { env.UNSET } != ''"
 
     - run: |
-         if ["$BAD" == ""]; then
-            echo "sh check ["$BAD" == ""]"
+         if ["$UNSET" == ""]; then
+            echo "using ["$UNSET" == ""] within run"
          fi
