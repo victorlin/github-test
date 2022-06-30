@@ -3,28 +3,48 @@ jobs:
   run:
     runs-on: ubuntu-latest
     steps:
-    - run: echo "EXISTS=foo" | tee -a $GITHUB_ENV
 
+    # create a variable and show the value of the variable and an unset variable
+
+    - run: echo "EXISTS=foo" | tee -a $GITHUB_ENV
     - run: echo "EXISTS=${{ env.EXISTS }}"
     - run: echo "UNSET=${{ env.UNSET }}"
 
-    - if: ${{ env.EXISTS == 'bar' }}
-      run: echo "{ env.EXISTS == 'bar' }"
 
-    - if: ${{ env.EXISTS }} == 'bar'
-      run: echo "{ env.EXISTS } == 'bar'"
+    # comparing within ${{ ... }} works fine:
+
+    - if: ${{ env.EXISTS == 'foo' }}
+      run: echo "{ env.EXISTS == 'foo' }"
+
+    - if: ${{ env.EXISTS == 'wrong value' }}
+      run: echo "{ env.EXISTS == 'wrong value' } (this should not print)"
+
+    - if: ${{ env.EXISTS != 'wrong value' }}
+      run: echo "{ env.EXISTS != 'wrong value' }"
 
     - if: ${{ env.UNSET == '' }}
       run: echo "{ env.UNSET == '' }"
 
+    - if: ${{ env.UNSET  != '' }}
+      run: echo "{ env.UNSET  != '' } (this should not print)"
+
+
+    # comparing outside of ${{ ... }} gets weird:
+
+    - if: ${{ env.EXISTS }} == 'foo'
+      run: echo "{ env.EXISTS } == 'foo'"
+
+    - if: ${{ env.EXISTS }} == 'wrong value'
+      run: echo "{ env.EXISTS } == 'wrong value' (this should not print)"
+
     - if: ${{ env.UNSET }} == ''
       run: echo "{ env.UNSET } == ''"
 
-    - if: ${{ env.UNSET  != '' }}
-      run: echo "this should not print! { env.UNSET  != '' }"
-
     - if: ${{ env.UNSET }} != ''
-      run: echo "this should not print! { env.UNSET } != ''"
+      run: echo "{ env.UNSET } != '' (this should not print)"
+
+
+    # this works but is hacky
 
     - run: |
          if ["$UNSET" == ""]; then
