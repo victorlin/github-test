@@ -1,0 +1,18 @@
+on: workflow_dispatch
+jobs:
+  run:
+    runs-on: ubuntu-latest
+    steps:
+    - run: echo "FOO=bar" | tee -a $GITHUB_ENV
+    - if: ${{ env.FOO == 'bar' }}
+      run: echo "can check existing 1"
+    - if: ${{ env.FOO }} == 'bar'
+      run: echo "can check existing 2"
+    - if: ${{ env.BAD == '' }}
+      run: echo "can check non-existing 1"
+    - if: ${{ env.BAD }} == ''
+      run: echo "can check non-existing 2"
+    - run: |
+         if ["$BAD" == ""]; then
+            echo "can check non-existing 3"
+         fi
