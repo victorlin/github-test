@@ -4,15 +4,26 @@ jobs:
     runs-on: ubuntu-latest
     steps:
     - run: echo "FOO=bar" | tee -a $GITHUB_ENV
+
     - if: ${{ env.FOO == 'bar' }}
-      run: echo "can check existing 1"
+      run: echo "${{ env.FOO == 'bar' }}"
+
     - if: ${{ env.FOO }} == 'bar'
-      run: echo "can check existing 2"
+      run: echo "${{ env.FOO }} == 'bar'"
+
     - if: ${{ env.BAD == '' }}
-      run: echo "can check non-existing 1"
+      run: echo "${{ env.BAD == '' }}"
+
     - if: ${{ env.BAD }} == ''
-      run: echo "can check non-existing 2"
+      run: echo "${{ env.BAD }} == ''"
+
+    - if: ${{ env.BAD  != '' }}
+      run: echo "this should not print! ${{ env.BAD  != '' }}"
+
+    - if: ${{ env.BAD }} != ''
+      run: echo "this should not print ${{ env.BAD }} != ''"
+
     - run: |
          if ["$BAD" == ""]; then
-            echo "can check non-existing 3"
+            echo "sh check ["$BAD" == ""]"
          fi
