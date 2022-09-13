@@ -1,0 +1,38 @@
+on: workflow_dispatch
+jobs:
+  ubuntu20-default-skopeo:
+    runs-on: ubuntu-20.04
+    steps:
+    - run: skopeo --version
+  ubuntu20-latest-skopeo:
+    runs-on: ubuntu-20.04
+    steps:
+    - run: |
+              sudo apt purge buildah golang-github-containers-common podman skopeo
+              sudo apt autoremove --purge
+    - run: |
+              REPO_URL="https://download.opensuse.org/repositories/devel:/kubic:/libcontainers:/unstable"
+              source /etc/os-release
+              sudo sh -c "echo 'deb ${REPO_URL}/x${NAME}_${VERSION_ID}/ /' > /etc/apt/sources.list.d/devel:kubic:libcontainers:unstable.list"
+              sudo wget -qnv https://download.opensuse.org/repositories/devel:kubic:libcontainers:stable/x${NAME}_${VERSION_ID}/Release.key -O Release.key
+              sudo apt-key add Release.key
+              sudo apt-get update
+    - run: |
+              sudo apt-get install skopeo
+    - run: skopeo --version
+  ubuntu22-latest-skopeo:
+    runs-on: ubuntu-22.04
+    steps:
+    - run: |
+              sudo apt purge buildah golang-github-containers-common podman skopeo
+              sudo apt autoremove --purge
+    - run: |
+              REPO_URL="https://download.opensuse.org/repositories/devel:/kubic:/libcontainers:/unstable"
+              source /etc/os-release
+              sudo sh -c "echo 'deb ${REPO_URL}/x${NAME}_${VERSION_ID}/ /' > /etc/apt/sources.list.d/devel:kubic:libcontainers:unstable.list"
+              sudo wget -qnv https://download.opensuse.org/repositories/devel:kubic:libcontainers:stable/x${NAME}_${VERSION_ID}/Release.key -O Release.key
+              sudo apt-key add Release.key
+              sudo apt-get update
+    - run: |
+              sudo apt-get install skopeo
+    - run: skopeo --version
