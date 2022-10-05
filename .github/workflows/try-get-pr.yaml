@@ -3,6 +3,7 @@ jobs:
   run:
     runs-on: ubuntu-latest
     steps:
+    - uses: actions/checkout@v3
     - run: echo $GITHUB_REF_NAME
     - run: |
         PR_NUMBER=$(gh pr view $GITHUB_REF_NAME --json 'number' --jq '.number')
