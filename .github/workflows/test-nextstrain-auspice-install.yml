@@ -8,7 +8,7 @@ jobs:
         node: [14, 16]
     steps:
       - name: Checkout nextstrain.org
-        uses: actions/checkout@v3
+        uses: actions/checkout@v3.1.0
         with:
           repository: nextstrain/nextstrain.org
       - uses: actions/setup-node@v3
@@ -28,7 +28,7 @@ jobs:
       NEXTSTRAIN_ORG_REPO_DIR: nextstrain.org
     steps:
       - name: Checkout nextstrain.org
-        uses: actions/checkout@v3
+        uses: actions/checkout@v3.1.0
         with:
           repository: nextstrain/nextstrain.org
           path: ${{ env.NEXTSTRAIN_ORG_REPO_DIR }}
@@ -38,7 +38,7 @@ jobs:
       - run: npm ci
         working-directory: ${{ env.NEXTSTRAIN_ORG_REPO_DIR }}
       - name: Checkout auspice
-        uses: actions/checkout@v3
+        uses: actions/checkout@v3.1.0
         with:
           path: ${{ env.AUSPICE_REPO_DIR }}
           repository: nextstrain/auspice
