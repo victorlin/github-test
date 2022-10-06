@@ -12,6 +12,7 @@ jobs:
           node-version: '14'
       - run: npm ci
       - run: npm install nextstrain/auspice#d3d184519e0307dfbf1be398d8025255bc4918a3
+      - run: cat package.json | jq '.dependencies.auspice'
   npm-install-clone:
     runs-on: ubuntu-latest
     steps:
@@ -30,3 +31,4 @@ jobs:
           repository: nextstrain/auspice
           ref: d3d184519e0307dfbf1be398d8025255bc4918a3
       - run: npm install $GITHUB_WORKSPACE/auspice
+      - run: cat package.json | jq '.dependencies.auspice'
