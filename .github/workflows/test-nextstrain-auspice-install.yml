@@ -18,6 +18,9 @@ jobs:
       - run: cat package.json | jq '.dependencies.auspice'
   npm-install-clone:
     runs-on: ubuntu-latest
+    strategy:
+      matrix:
+        node: [14, 16]
     steps:
       - name: Checkout nextstrain.org
         uses: actions/checkout@v3
