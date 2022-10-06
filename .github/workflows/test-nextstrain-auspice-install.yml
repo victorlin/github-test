@@ -32,6 +32,8 @@ jobs:
         with:
           node-version: ${{ matrix.node }}
       - run: npm ci
+      - if: matrix.node == 14
+        run: sudo chown -R $USER:$USER /home/github/actions-runner/_work/${{ github.event.repository.name }}
       - name: Checkout auspice
         uses: actions/checkout@v3
         with:
