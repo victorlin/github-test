@@ -2,6 +2,9 @@ on: workflow_dispatch
 jobs:
   npm-install-github:
     runs-on: ubuntu-latest
+    strategy:
+      matrix:
+        node: [14, 16]
     steps:
       - name: Checkout nextstrain.org
         uses: actions/checkout@v3
@@ -9,7 +12,7 @@ jobs:
           repository: nextstrain/nextstrain.org
       - uses: actions/setup-node@v3
         with:
-          node-version: '14'
+          node-version: ${{ matrix.node }}
       - run: npm ci
       - run: npm install nextstrain/auspice#d3d184519e0307dfbf1be398d8025255bc4918a3
       - run: cat package.json | jq '.dependencies.auspice'
@@ -22,7 +25,7 @@ jobs:
           repository: nextstrain/nextstrain.org
       - uses: actions/setup-node@v3
         with:
-          node-version: '14'
+          node-version: ${{ matrix.node }}
       - run: npm ci
       - name: Checkout auspice
         uses: actions/checkout@v3
