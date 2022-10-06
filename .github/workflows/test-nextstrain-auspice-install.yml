@@ -38,6 +38,7 @@ jobs:
           path: auspice
           repository: nextstrain/auspice
           ref: d3d184519e0307dfbf1be398d8025255bc4918a3
+      - run: cd auspice && npm ci
       # Fix "checkPermissions Missing write access to …"
       - if: matrix.node == 14
         run: sudo chown -R $USER:$USER auspice/node_modules/
