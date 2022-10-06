@@ -32,13 +32,14 @@ jobs:
         with:
           node-version: ${{ matrix.node }}
       - run: npm ci
-      - if: matrix.node == 14
-        run: sudo chown -R $USER:$USER /home/github/actions-runner/_work/${{ github.event.repository.name }}
       - name: Checkout auspice
         uses: actions/checkout@v3
         with:
           path: auspice
           repository: nextstrain/auspice
           ref: d3d184519e0307dfbf1be398d8025255bc4918a3
+      # Fix "checkPermissions Missing write access to …"
+      - if: matrix.node == 14
+        run: sudo chown -R $USER:$USER auspice/node_modules/
       - run: npm install $GITHUB_WORKSPACE/auspice
       - run: cat package.json | jq '.dependencies.auspice'
