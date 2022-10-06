@@ -12,12 +12,12 @@ jobs:
   npm-install-clone:
     runs-on: ubuntu-latest
     steps:
-      - name: Checkout nextstrain.org repo
+      - name: Checkout nextstrain.org
         uses: actions/checkout@v3
         with:
           repository: nextstrain/nextstrain.org
       - run: npm ci
-      - name: Checkout nextstrain.org
+      - name: Checkout auspice
         uses: actions/checkout@v3
         with:
           path: auspice
