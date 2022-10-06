@@ -1,0 +1,26 @@
+on: workflow_dispatch
+jobs:
+  npm-install-github:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout nextstrain.org
+        uses: actions/checkout@v3
+        with:
+          repository: nextstrain/nextstrain.org
+      - run: npm ci
+      - run: npm install nextstrain/auspice#d3d184519e0307dfbf1be398d8025255bc4918a3
+  npm-install-clone:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout nextstrain.org repo
+        uses: actions/checkout@v3
+        with:
+          repository: nextstrain/nextstrain.org
+      - run: npm ci
+      - name: Checkout nextstrain.org
+        uses: actions/checkout@v3
+        with:
+          path: auspice
+          repository: nextstrain/auspice
+          ref: d3d184519e0307dfbf1be398d8025255bc4918a3
+      - run: npm install $GITHUB_WORKSPACE/auspice
