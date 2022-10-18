@@ -9,8 +9,8 @@ jobs:
           registry: ghcr.io
           username: ${{ github.actor }}
           password: ${{ secrets.GITHUB_TOKEN }}
-      - run: docker tag hello-world:latest ghcr.io/hello-world:latest
-      - run: docker push ghcr.io/hello-world:latest
+      - run: docker tag hello-world:latest ghcr.io/${{ github.actor }}/hello-world:latest
+      - run: docker push ghcr.io/${{ github.actor }}/hello-world:latest
   pull:
     needs: push
     runs-on: ubuntu-latest
@@ -20,4 +20,4 @@ jobs:
           registry: ghcr.io
           username: ${{ github.actor }}
           password: ${{ secrets.GITHUB_TOKEN }}
-      - run: docker pull ghcr.io/hello-world:latest
+      - run: docker pull ghcr.io/${{ github.actor }}/hello-world:latest
