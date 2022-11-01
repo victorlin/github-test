@@ -4,6 +4,7 @@ jobs:
     runs-on: ubuntu-latest
     steps:
     - run: |
-      echo "MYVAR=value" | tee -a $GITHUB_ENV
-      echo "MYVAR: $MYVAR"
-    - run: echo "MYVAR: $MYVAR"
+        echo "MYVAR=value" | tee -a $GITHUB_ENV
+        echo "MYVAR: $MYVAR"
+    - run: |
+        echo "MYVAR: $MYVAR"
