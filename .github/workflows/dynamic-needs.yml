@@ -15,9 +15,7 @@ jobs:
     - run: echo "${{ github.job }}"
   job3:
     runs-on: ubuntu-latest
-    needs:
-    - job1
-    - ${{ true && '' || 'job2' }}
+    needs: ${{ true && [job1] || [job1, job2] }}
     steps:
     - run: echo "${{ github.job }}"
     - run: echo "${{ github.event.inputs.run_parallel }}"
