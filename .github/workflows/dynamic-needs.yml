@@ -17,6 +17,7 @@ jobs:
     runs-on: ubuntu-latest
     needs:
     - job1
-    - ${{ github.event.inputs.run_parallel && '' || 'job2' }}
+    - ${{ true && '' || 'job2' }}
     steps:
     - run: echo "${{ github.job }}"
+    - run: echo "${{ github.event.inputs.run_parallel }}"
