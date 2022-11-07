@@ -6,5 +6,7 @@ jobs:
     - run: |
         echo "MYVAR=value" | tee -a $GITHUB_ENV
         echo "MYVAR: $MYVAR"
+        echo "MYVAR: ${{ env.MYVAR }}"
     - run: |
         echo "MYVAR: $MYVAR"
+        echo "MYVAR: ${{ env.MYVAR }}"
