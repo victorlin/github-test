@@ -1,0 +1,13 @@
+on: workflow_dispatch
+jobs:
+  run:
+    runs-on: ubuntu-latest
+    steps:
+    - if: true
+      run: echo "hello"
+    - if: true && true
+      run: echo "hello"
+    - if: true && false
+      run: echo "hello"
+    - if: !false || false
+      run: echo "hello"
