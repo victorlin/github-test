@@ -46,10 +46,12 @@ jobs:
           python --version | grep -F 'Python ${{ matrix.python }}.'
           echo $?
         shell: bash -l -o pipefail {0}
+        continue-on-error: true
       - run: |
           python3 --version | grep -F 'Python ${{ matrix.python }}.'
           echo $?
         shell: bash -l -o pipefail {0}
+        continue-on-error: true
       - run: |
           [[ "$(python --version)" == "$(python3 --version)" ]]
         shell: bash -l -eo pipefail {0}
