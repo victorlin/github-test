@@ -53,5 +53,10 @@ jobs:
         shell: bash -l -o pipefail {0}
         continue-on-error: true
       - run: |
+          echo "Python 3.6.13 :: Anaconda, Inc." | grep -F 'Python 3.6.'
+          echo $?
+        shell: bash -l -o pipefail {0}
+        continue-on-error: true
+      - run: |
           [[ "$(python --version)" == "$(python3 --version)" ]]
         shell: bash -l -eo pipefail {0}
