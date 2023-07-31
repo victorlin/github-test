@@ -1,0 +1,19 @@
+on: workflow_dispatch
+jobs:
+  run:
+    runs-on: ubuntu-latest
+    strategy:
+      fail-fast: false
+      matrix:
+        python:
+          - '3.7'
+          - '3.8'
+          - '3.9'
+          - '3.10'
+          - '3.11'
+    steps:
+      - uses: nextstrain/.github/actions/setup-nextstrain-cli@master
+        with:
+          runtime: "conda"
+          python-version: ${{ matrix.python }}
+      - run: nextstrain version --verbose
