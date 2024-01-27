@@ -4,6 +4,6 @@ jobs:
     runs-on: ubuntu-latest
     steps:
       - run: |
-          cat >"$GITHUB_STEP_SUMMARY" <~~
+          cat >"$GITHUB_STEP_SUMMARY" <<~~
           ${{ github.run_id }}
           ~~
