@@ -1,0 +1,15 @@
+run-name: Test name ${{ inputs.name }}
+
+on:
+  workflow_dispatch:
+    inputs:
+      name:
+        description: 'This will be shown in the workflow run name'
+        required: true
+        type: string
+
+jobs:
+  run:
+    runs-on: ubuntu-latest
+    steps:
+    - run: echo "hi"
