@@ -6,3 +6,4 @@ jobs:
     steps:
     - run: echo "${{ github.workflow }}"
     - run: echo "${{ github.workflow_ref }}"
+    - run: echo "${{ github.repository }}/.github/workflows/github-context.yml@refs/heads/${{ github.event.repository.default_branch }}"
