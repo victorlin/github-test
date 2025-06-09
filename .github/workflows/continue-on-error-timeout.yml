@@ -1,0 +1,12 @@
+on: workflow_dispatch
+jobs:
+  job1:
+    runs-on: ubuntu-latest
+    timeout-minutes: 1
+    steps:
+      - run: sleep 5m
+  job2:
+    runs-on: ubuntu-latest
+    needs: job1
+    steps:
+      - run: exit 0
