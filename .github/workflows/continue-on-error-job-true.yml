@@ -1,0 +1,11 @@
+on: workflow_dispatch
+jobs:
+  success:
+    runs-on: ubuntu-latest
+    steps:
+      - run: exit 0
+  error:
+    runs-on: ubuntu-latest
+    continue-on-error: true
+    steps:
+      - run: exit 1
