@@ -19,3 +19,8 @@ jobs:
     continue-on-error: true
     steps:
       - run: exit ${{ matrix.exit }}
+      - if: always()
+        name: Verify matrix exit
+        run: |
+          echo "Matrix exit code: ${{ matrix.exit }}"
+          [[ ${{ matrix.exit }} -eq 0 ]]
