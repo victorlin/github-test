@@ -1,0 +1,16 @@
+on: workflow_dispatch
+jobs:
+  job1:
+    runs-on: ubuntu-latest
+    steps:
+      - run: exit 0
+  job2:
+    runs-on: ubuntu-latest
+    needs: job1
+    steps:
+      - run: exit 0
+  error:
+    runs-on: ubuntu-latest
+    continue-on-error: true
+    steps:
+      - run: exit 1
