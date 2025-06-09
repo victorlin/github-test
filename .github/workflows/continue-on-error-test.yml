@@ -10,8 +10,12 @@ jobs:
     needs: job1
     steps:
       - run: exit 0
-  error:
+  matrix:
     runs-on: ubuntu-latest
+    strategy:
+      fail-fast: false
+      matrix:
+        exit: [0, 1]
     continue-on-error: true
     steps:
-      - run: exit 1
+      - run: exit ${{ matrix.exit }}
