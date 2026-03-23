@@ -11,8 +11,3 @@ jobs:
           - windows-latest
     steps:
     - uses: conda-incubator/setup-miniconda@v3
-      with:
-        python-version: "3.10"
-        miniforge-version: latest
-        channels: conda-forge,bioconda
-        conda-remove-defaults: true
