@@ -13,5 +13,6 @@ jobs:
     - uses: conda-incubator/setup-miniconda@v3
       with:
         python-version: "3.10"
-        channels: conda-forge,bioconda
+        miniforge-version: latest
+        channels: conda-forge
         conda-remove-defaults: true
