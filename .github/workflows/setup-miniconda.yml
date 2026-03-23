@@ -1,18 +1,11 @@
 on: [workflow_dispatch, push]
 jobs:
   run:
-    runs-on: ${{ matrix.runner }}
-    strategy:
-      fail-fast: false
-      matrix:
-        runner:
-          # - ubuntu-latest
-          # - macos-latest
-          - windows-latest
+    runs-on: windows-latest
     steps:
     - uses: conda-incubator/setup-miniconda@v3
       with:
-        python-version: "3.10"
+        python-version: '3.10'
         miniforge-version: latest
         channels: conda-forge
         conda-remove-defaults: true
